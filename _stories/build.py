@@ -325,7 +325,7 @@ def field_section():
         + img(f, n, alt, "aspect-video w-full border-b border-ink-600 object-cover")
         + f'<figcaption class="flex flex-1 flex-col gap-3 p-6"><div>{badge(tag)}</div><p class="text-sm leading-relaxed text-mist-300">{e(cap)}</p></figcaption></figure></div>'
         for i, (f, n, tag, alt, cap) in enumerate(FIELD))
-    return ('<section class="border-t border-ink-600 bg-ink-850 py-16 sm:py-20"><div class="container-page">'
+    return ('<section id="from-the-field" class="border-t border-ink-600 bg-ink-850 py-16 sm:py-20"><div class="container-page">'
             '<div class="max-w-3xl"><p class="kicker mb-3 flex items-center gap-2.5 "><span class="inline-block h-px w-8 bg-green-400" aria-hidden="true"></span>From the field</p>'
             '<h2 class="font-display text-3xl font-bold tracking-tight text-mist-100 text-balance">Moments from our programs</h2>'
             '<p class="mt-4 text-base leading-relaxed text-mist-400">Snapshots of the everyday work: livelihoods, green jobs, sport and mentorship across our communities.</p></div>'
@@ -357,7 +357,7 @@ def check_classes(pages):
     missing = []
     for c in sorted(used):
         esc = re.sub(r"([:/\[\]().,!%#])", r"\\\1", c)
-        if "." + esc not in css and c not in ("group", "reveal-up", "kicker", "hero-stagger", "container-page", "prose-ngo", "tricolor", "bg-grid", "glow-bg", "reveal"):
+        if "." + esc not in css and not c.startswith("kh-") and c not in ("group", "reveal-up", "kicker", "hero-stagger", "container-page", "prose-ngo", "tricolor", "bg-grid", "glow-bg", "reveal"):
             missing.append(c)
     if missing:
         print("WARNING: classes not in the stylesheet:", " ".join(missing))
@@ -396,6 +396,16 @@ def main():
     for f in os.listdir(os.path.join(ROOT, "news")):
         if f.endswith(".txt"):
             os.remove(os.path.join(ROOT, "news", f))
+    # Home page (see home.py), static for the same reason as the News page.
+    sys.path.insert(0, HERE)
+    from home import build_home
+    p = build_home(open(os.path.join(HERE, "home-template.html")).read())
+    open(os.path.join(ROOT, "index.html"), "w").write(p)
+    pages.append(p)
+    print("page  /")
+    for f in os.listdir(ROOT):
+        if f.endswith(".txt") and (f == "index.txt" or f.startswith("__next.")):
+            os.remove(os.path.join(ROOT, f))
     sitemap()
     check_classes(pages)
 
