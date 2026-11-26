@@ -100,4 +100,9 @@
 <changefreq>yearly</changefreq>
 <priority>0.5</priority>
 </url>
+<url><loc>https://www.keysa.org/news/nairobi-river-restoration/</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+<url><loc>https://www.keysa.org/news/irmt-monitoring-rarieda/</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+<url><loc>https://www.keysa.org/news/kisumu-ending-youth-trafficking/</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+<url><loc>https://www.keysa.org/news/interpol-seah-capacity-building/</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+<url><loc>https://www.keysa.org/news/giving-to-homes-and-rescue-centres/</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
 </urlset>
